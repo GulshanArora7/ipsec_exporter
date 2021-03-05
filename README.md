@@ -1,5 +1,7 @@
-# IPsec Exporter ![Test](https://github.com/GulshanArora7/ipsec_exporter/workflows/Test/badge.svg)
+# IPsec Exporter to Monitor Stronswan Metrics ![Test](https://github.com/GulshanArora7/ipsec_exporter/workflows/Test/badge.svg)
 Prometheus exporter for ipsec metrics, written in Go.
+
+Inspired By : https://github.com/dennisstritzke/ipsec_exporter
 
 ## Functionality
 The IPsec exporter is determining the state of the configured IPsec tunnels via the following procedure.
