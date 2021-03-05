@@ -13,7 +13,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
 
       - uses: actions/checkout@v2
-      - run: go build -a -installsuffix cgo -o bin/ipsec_exporter -ldflags "-X github.com/dennisstritzke/ipsec_exporter/cmd.Version=$IPSEC_EXPORTER_VERSION"
+      - run: go build -a -installsuffix cgo -o bin/ipsec_exporter -ldflags "-X github.com/GulshanArora7/ipsec_exporter/cmd.Version=$IPSEC_EXPORTER_VERSION"
         env:
           IPSEC_EXPORTER_VERSION: ${{ steps.version_info.outputs.VERSION }}
           GOOS: linux

@@ -1,10 +1,11 @@
 package ipsec
 
 import (
-	"github.com/prometheus/common/log"
 	"os/exec"
 	"regexp"
 	"strconv"
+
+	"github.com/prometheus/common/log"
 )
 
 type status struct {
@@ -34,7 +35,7 @@ type cliStatusProvider struct {
 }
 
 func (c *cliStatusProvider) statusOutput(tunnel connection) (string, error) {
-	cmd := exec.Command("ipsec", "statusall", tunnel.name)
+	cmd := exec.Command("strongswan", "statusall", tunnel.name)
 	out, err := cmd.Output()
 
 	if err != nil {

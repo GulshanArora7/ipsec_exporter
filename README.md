@@ -1,10 +1,10 @@
-# IPsec Exporter ![Test](https://github.com/dennisstritzke/ipsec_exporter/workflows/Test/badge.svg)
+# IPsec Exporter ![Test](https://github.com/GulshanArora7/ipsec_exporter/workflows/Test/badge.svg)
 Prometheus exporter for ipsec metrics, written in Go.
 
 ## Functionality
 The IPsec exporter is determining the state of the configured IPsec tunnels via the following procedure.
-1. Starting up the `ipsec.conf` is read. All tunnels configured via the `conn` keyword are observed.
-1. If the `/metrics` endpoint is queried, the exporter calls `ipsec status <tunnel name>` for each configured
+1. Starting up the `/etc/strongswan/ipsec.conf` is read. All tunnels configured via the `conn` keyword are observed.
+1. If the `/metrics` endpoint is queried, the exporter calls `strongswan status <tunnel name>` for each configured
 connection. The output is parsed.
     * If the output contains `ESTABLISHED`, we assume that only the connection is up.
     * If the output contains `INSTALLED`, we assume that the tunnel is up and running.

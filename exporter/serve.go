@@ -1,27 +1,32 @@
 package exporter
 
 import (
-	"github.com/dennisstritzke/ipsec_exporter/ipsec"
+	"net/http"
+
+	"github.com/GulshanArora7/ipsec_exporter/ipsec"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/common/log"
-	"net/http"
 )
 
-var IpSecConfigFile string
+// IPSecConfigFile Variable
+var IPSecConfigFile string
+
+// WebListenAddress Variable
 var WebListenAddress string
 
 var ipSecConfiguration *ipsec.Configuration
 
+// Serve Function
 func Serve() {
 	var err error
-	ipSecConfiguration, err = ipsec.NewConfiguration(IpSecConfigFile)
+	ipSecConfiguration, err = ipsec.NewConfiguration(IPSecConfigFile)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 	if !ipSecConfiguration.HasTunnels() {
-		log.Warn("Found no configured connections in " + IpSecConfigFile)
+		log.Warn("Found no configured connections in " + IPSecConfigFile)
 	}
 
 	collector := ipsec.NewCollector(ipSecConfiguration)
@@ -29,9 +34,9 @@ func Serve() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte(`<html>
-             <head><title>IPsec Exporter</title></head>
+             <head><title>IStrongswan IPSec Metrics Exporter</title></head>
              <body>
-             <h1>IPsec Exporter</h1>
+             <h1>Strongswan IPSec Metrics Exporter</h1>
              <p><a href='/metrics'>Metrics</a></p>
              </body>
              </html>`))

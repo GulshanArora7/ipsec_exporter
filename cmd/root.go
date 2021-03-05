@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/dennisstritzke/ipsec_exporter/exporter"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/GulshanArora7/ipsec_exporter/exporter"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -12,7 +13,10 @@ const (
 	flagWebListenAddress = "web.listen-address"
 )
 
+// Version Variable
 var Version string
+
+// RootCmd Variable
 var RootCmd = &cobra.Command{
 	Use:     "ipsec_exporter",
 	Short:   "Prometheus exporter for ipsec status.",
@@ -23,14 +27,15 @@ var RootCmd = &cobra.Command{
 
 func init() {
 	RootCmd.PersistentFlags().StringVar(&exporter.IpSecConfigFile, flagIpsecConfigFile,
-		"/etc/ipsec.conf",
+		"/etc/strongswan/ipsec.conf",
 		"Path to the ipsec config file.")
 
 	RootCmd.PersistentFlags().StringVar(&exporter.WebListenAddress, flagWebListenAddress,
-		"0.0.0.0:9536",
+		"0.0.0.0:9110",
 		"Address on which to expose metrics.")
 }
 
+// Execute Function
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
