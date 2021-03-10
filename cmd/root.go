@@ -5,12 +5,14 @@ import (
 	"os"
 
 	"github.com/GulshanArora7/ipsec_exporter/exporter"
+	"github.com/GulshanArora7/ipsec_exporter/ipsec"
 	"github.com/spf13/cobra"
 )
 
 const (
 	flagIPSecConfigFile  = "config-path"
 	flagWebListenAddress = "web.listen-address"
+	flagExcludeConnName  = "exclude-conn"
 )
 
 // Version Variable
@@ -27,12 +29,16 @@ var RootCmd = &cobra.Command{
 
 func init() {
 	RootCmd.PersistentFlags().StringVar(&exporter.IPSecConfigFile, flagIPSecConfigFile,
-		"/etc/strongswan/ipsec.conf",
+		"/opt/strongswan/ipsec.conf",
 		"Path to the ipsec config file.")
 
 	RootCmd.PersistentFlags().StringVar(&exporter.WebListenAddress, flagWebListenAddress,
 		"0.0.0.0:9110",
 		"Address on which to expose metrics.")
+
+	RootCmd.PersistentFlags().StringVar(&ipsec.ExcludeConnName, flagExcludeConnName,
+		"",
+		"Tunnel Connection Name to Exclude.")
 }
 
 // Execute Function

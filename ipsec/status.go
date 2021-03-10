@@ -8,6 +8,9 @@ import (
 	"github.com/prometheus/common/log"
 )
 
+// ExcludeConnName Variable
+var ExcludeConnName string
+
 type status struct {
 	up         bool
 	status     connectionStatus
@@ -41,7 +44,6 @@ func (c *cliStatusProvider) statusOutput(tunnel connection) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return string(out), nil
 }
 
@@ -49,6 +51,9 @@ func queryStatus(ipSecConfiguration *Configuration, provider statusProvider) map
 	statusMap := map[string]*status{}
 
 	for _, connection := range ipSecConfiguration.tunnel {
+		if connection.name == ExcludeConnName {
+			continue
+		}
 		if connection.ignored {
 			statusMap[connection.name] = &status{
 				up:     true,
@@ -56,7 +61,6 @@ func queryStatus(ipSecConfiguration *Configuration, provider statusProvider) map
 			}
 			continue
 		}
-
 		if out, err := provider.statusOutput(connection); err != nil {
 			log.Warnf("Unable to retrieve the status of tunnel '%s'. Reason: %v", connection.name, err)
 			statusMap[connection.name] = &status{
