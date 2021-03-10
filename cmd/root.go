@@ -29,7 +29,7 @@ var RootCmd = &cobra.Command{
 
 func init() {
 	RootCmd.PersistentFlags().StringVar(&exporter.IPSecConfigFile, flagIPSecConfigFile,
-		"/opt/strongswan/ipsec.conf",
+		"/etc/strongswan/ipsec.conf",
 		"Path to the ipsec config file.")
 
 	RootCmd.PersistentFlags().StringVar(&exporter.WebListenAddress, flagWebListenAddress,
