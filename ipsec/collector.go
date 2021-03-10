@@ -5,15 +5,15 @@ import (
 )
 
 var (
-	metricUp = prometheus.NewDesc("ipsec_up", "value indicating a successful scrape", []string{"tunnel"}, nil)
-	metricStatus = prometheus.NewDesc("ipsec_status", "ipsec status value", []string{"tunnel"}, nil)
-	metricBytesIn = prometheus.NewDesc("ipsec_in_bytes", "received bytes per tunnel", []string{"tunnel"}, nil)
-	metricBytesOut = prometheus.NewDesc("ipsec_out_bytes", "sent bytes per tunnel", []string{"tunnel"}, nil)
-	metricPacketsIn = prometheus.NewDesc("ipsec_in_packets", "received packets per tunnel", []string{"tunnel"}, nil)
-	metricPacketsOut = prometheus.NewDesc("ipsec_out_packets", "sent packets per tunnel", []string{"tunnel"}, nil)
+	metricUp         = prometheus.NewDesc("strongswan_ipsec_up", "value indicating a successful scrape", []string{"tunnel"}, nil)
+	metricStatus     = prometheus.NewDesc("strongswan_ipsec_status", "ipsec status value", []string{"tunnel"}, nil)
+	metricBytesIn    = prometheus.NewDesc("strongswan_ipsec_in_bytes", "received bytes per tunnel", []string{"tunnel"}, nil)
+	metricBytesOut   = prometheus.NewDesc("strongswan_ipsec_out_bytes", "sent bytes per tunnel", []string{"tunnel"}, nil)
+	metricPacketsIn  = prometheus.NewDesc("strongswan_ipsec_in_packets", "received packets per tunnel", []string{"tunnel"}, nil)
+	metricPacketsOut = prometheus.NewDesc("strongswan_ipsec_out_packets", "sent packets per tunnel", []string{"tunnel"}, nil)
 )
 
-func NewCollector(configurations ... *Configuration) *Collector {
+func NewCollector(configurations ...*Configuration) *Collector {
 	return &Collector{
 		configurations: configurations,
 	}
